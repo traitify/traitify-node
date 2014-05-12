@@ -13,19 +13,34 @@
  * @return {String}
  */
 module.exports = {
+  host: "your host",
+  setHost: function(host){
+    this.host = host;
+  },
 
-  createAssessment: function(params, callBack){
+  version: "version",
+  setVersion: function(version){
+    this.version = version;
+  },
+
+  privateKey: "privateKey",
+  setPrivateKey: function(privateKey){
+    this.privateKey = privateKey;
+  },
+
+
+  request: function(method, path, params, callBack){
     var http = require('http');
 
     var options = {
-        'hostname': params["host"], 
-        "path":"/" + params["version"] + "/assessments",
-        "method":"POST", 
+        'hostname': this.host, 
+        "path":"/" + this.version + path,
+        "method": method, 
         "json": true,
         "headers": {
           "Content-Type":"application/json", 
           "Accept": "application/json",
-          "Authorization":'Basic ' + params["privateKey"] + ':x'
+          "Authorization":'Basic ' + this.privateKey + ':x'
         }
     }
 
@@ -35,7 +50,39 @@ module.exports = {
       });
     });
 
-    request.end('{"deck_id":"' + params["deckId"] + '"}'); 
+    request.end(params); 
+  },
+
+  get: function(path, params, callBack){
+    this.request("GET", path, params, callBack);
+  },
+
+  put: function(path, params, callBack){
+    this.request("PUT", path, params, callBack);
+  },
+
+  post: function(path, params, callBack){
+    this.request("POST", path, params, callBack);
+  },
+
+  createAssessment: function(deckId, callBack){
+    this.post("/assessments", '{"deck_id":"' + deckId + '"}', callBack); 
+  },
+
+  getAssessment: function(assessmentId, callBack){
+    this.get("/assessments/" + assessmentId, String(), callBack); 
+  },
+
+  getSlides: function(assessmentId, callBack){
+    this.get("/assessments/" + assessmentId + "/slides", String(), callBack); 
+  },
+
+  setSlide: function(assessmentId, slideId, params, callBack){
+    this.put("/assessments/" + assessmentId + "/slides/" + slideId, params, callBack); 
+  },
+
+  getPersonalityTypes: function(assessmentId, callBack){
+    this.get("/assessments/" + assessmentId + "/personality_types", String(), callBack); 
   }
 };
 
