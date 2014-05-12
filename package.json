@@ -1,0 +1,27 @@
+{
+  "name": "traitify",
+  "version": "0.1.0",
+  "description": "A small library providing access to traitify's api",
+  "main": "index.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:woofound/traitify-node.git"
+  },
+  "keywords": [
+    "escape",
+    "unescape",
+    "html"
+  ],
+  "author": "Carson Wright <carsonnwright@gmail.com>",
+  "bugs": {
+    "url": "http://github.com/woofound/traitify-node/issues"
+  },
+  "devDependencies": {
+    "mocha": "~1.16.2",
+    "chai": "~1.8.1",
+    "nock": "0.30.0"
+  }
+}
