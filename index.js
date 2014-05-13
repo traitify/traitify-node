@@ -50,6 +50,7 @@ module.exports = {
       response.on('data', function (chunk) {
         responseData += chunk
       });
+      
       response.on('end', function () {
         callBack(JSON.parse(responseData));
       });
