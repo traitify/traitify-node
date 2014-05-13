@@ -6,25 +6,67 @@ A small library providing access to traitify's api
 ## Installation
 
 ```shell
-  npm install traitify -g
+  npm install -g traitify
 ```
 
 ## Usage
 
+#### Config
 ```js
   var traitify = require('traitify');
-  var config = {
-  	host:"lvh.me",
-  	version:"v1",
-  	privateKey:"fakeKey",
-    deckId:"fakeDeckId"
-  };
+  
+	traitify.setHost("lvh.me");
+	traitify.setVersion("v1");
+	traitify.setPrivateKey("fakeKey");  
+```
 
-  traitify.createAssessment(options, function(assessment){
+#### Create Assessment
+```js
+  var deckId = "Your Deck Id";
+  traitify.createAssessment(deckId, function(assessment){
   	// Use assessment here.
   	console.log(assessment);
   });
+```
 
+#### Get Assessment
+```js
+  var assessmentId = "Your Assessment Id";
+
+  traitify.getAssessment(assessmentId, function(assessment){
+    // Use assessment here.
+    console.log(assessment);
+  });
+```
+
+#### Get Assessment Slides
+```js
+  var assessmentId = "Your Assessment Id";
+
+  traitify.getSlides(assessmentId, function(assessment){
+    // Use assessment here.
+    console.log(assessment);
+  });
+```
+
+#### Set Assessment Slide
+```js
+  var assessmentId = "Your Assessment Id";
+
+  traitify.setSlide(assessmentId, {"value":true, response_time: 1000}, function(assessment){
+    // Use assessment here.
+    console.log(assessment);
+  });
+```
+
+#### Get Assessment Personality Types
+```js
+  var assessmentId = "Your Assessment Id";
+
+  traitify.getPersonalityTypes(assessmentId, function(assessment){
+    // Use assessment here.
+    console.log(assessment);
+  });
 ```
 
 ## Tests
