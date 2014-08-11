@@ -30,7 +30,7 @@ module.exports = {
 
 
   request: function(method, path, params, callBack){
-    var http = require('http');
+    var http = require('https');
 
     var options = {
         'hostname': this.host, 

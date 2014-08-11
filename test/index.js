@@ -8,7 +8,7 @@ function nockApiHelper(method, path, responseData, callBack, options){
   traitify.setVersion("v1");
   traitify.setPrivateKey("fakeKey");
 
-  var api = nock("http://lvh.me")[method]("/v1"+path).reply(200, responseData);
+  var api = nock("https://lvh.me")[method]("/v1"+path).reply(200, responseData);
 
   callBack();
 
