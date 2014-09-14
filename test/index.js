@@ -31,7 +31,7 @@ describe('#Traitify', function() {
         data.id.should.equal("fakeAssessmentId");
         done();
       });
-    })    
+    })
   });
 
   it('Gets Personality Types', function(done) {
@@ -48,6 +48,25 @@ describe('#Traitify', function() {
     nockApiHelper("get", "/assessments/fakeAssessmentId/personality_types", responseData, function(){
       traitify.getPersonalityTypes("fakeAssessmentId", function(data){
         data.personality_types[0].score.should.equal(100);
+        done();
+      });
+    });
+  });
+
+  it('Gets Personality Traits', function(done) {
+
+    var responseData = {
+      "personality_traits":[
+        {"personality_trait":{
+          "name":"Cool Trait"
+        },
+        "score":100}
+      ]
+    };
+
+    nockApiHelper("get", "/assessments/fakeAssessmentId/personality_traits", responseData, function(){
+      traitify.getPersonalityTraits("fakeAssessmentId", function(data){
+        data.personality_traits[0].score.should.equal(100);
         done();
       });
     });

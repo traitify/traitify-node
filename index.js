@@ -33,12 +33,12 @@ module.exports = {
     var http = require('https');
 
     var options = {
-        'hostname': this.host, 
+        'hostname': this.host,
         "path":"/" + this.version + path,
-        "method": method, 
+        "method": method,
         "json": true,
         "headers": {
-          "Content-Type":"application/json", 
+          "Content-Type":"application/json",
           "Accept": "application/json",
           "Authorization":'Basic ' + this.privateKey + ':x'
         }
@@ -50,13 +50,13 @@ module.exports = {
       response.on('data', function (chunk) {
         responseData += chunk
       });
-      
+
       response.on('end', function () {
         callBack(JSON.parse(responseData));
       });
     });
 
-    request.end(params); 
+    request.end(params);
   },
 
   get: function(path, params, callBack){
@@ -72,23 +72,27 @@ module.exports = {
   },
 
   createAssessment: function(deckId, callBack){
-    this.post("/assessments", '{"deck_id":"' + deckId + '"}', callBack); 
+    this.post("/assessments", '{"deck_id":"' + deckId + '"}', callBack);
   },
 
   getAssessment: function(assessmentId, callBack){
-    this.get("/assessments/" + assessmentId, String(), callBack); 
+    this.get("/assessments/" + assessmentId, String(), callBack);
   },
 
   getSlides: function(assessmentId, callBack){
-    this.get("/assessments/" + assessmentId + "/slides", String(), callBack); 
+    this.get("/assessments/" + assessmentId + "/slides", String(), callBack);
   },
 
   setSlide: function(assessmentId, slideId, params, callBack){
-    this.put("/assessments/" + assessmentId + "/slides/" + slideId, params, callBack); 
+    this.put("/assessments/" + assessmentId + "/slides/" + slideId, params, callBack);
   },
 
   getPersonalityTypes: function(assessmentId, callBack){
-    this.get("/assessments/" + assessmentId + "/personality_types", String(), callBack); 
+    this.get("/assessments/" + assessmentId + "/personality_types", String(), callBack);
+  },
+
+  getPersonalityTraits: function(assessmentId, callBack){
+    this.get("/assessments/" + assessmentId + "/personality_traits", String(), callBack);
   }
 };
 
