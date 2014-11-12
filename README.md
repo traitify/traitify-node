@@ -17,7 +17,7 @@ A small library providing access to traitify's api
   
 	traitify.setHost("lvh.me");
 	traitify.setVersion("v1");
-	traitify.setPrivateKey("fakeKey");  
+	traitify.setSecretKey("fakeKey");
 ```
 
 #### Create Assessment

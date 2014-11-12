@@ -6,7 +6,7 @@ nock.disableNetConnect();
 function nockApiHelper(method, path, responseData, callBack, options){
   traitify.setHost("lvh.me");
   traitify.setVersion("v1");
-  traitify.setPrivateKey("fakeKey");
+  traitify.setSecretKey("fakeKey");
 
   var api = nock("https://lvh.me")[method]("/v1"+path).reply(200, responseData);
 

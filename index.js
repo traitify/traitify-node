@@ -23,11 +23,17 @@ module.exports = {
     this.version = version;
   },
 
-  privateKey: "privateKey",
-  setPrivateKey: function(privateKey){
-    this.privateKey = privateKey;
+  secretKey: "secretKey",
+  setSecretKey: function(secretKey){
+    this.secretKey = secretKey;
+    this.privateKey = secretKey;
   },
 
+  privateKey: "secretKey",
+  setPrivateKey: function(secretKey){
+    this.secretKey = secretKey;
+    this.privateKey = secretKey;
+  },
 
   request: function(method, path, params, callBack){
     var http = require('https');
@@ -40,7 +46,7 @@ module.exports = {
         "headers": {
           "Content-Type":"application/json",
           "Accept": "application/json",
-          "Authorization":'Basic ' + this.privateKey + ':x'
+          "Authorization":'Basic ' + this.secretKey + ':x'
         }
     }
 
