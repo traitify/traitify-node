@@ -99,6 +99,39 @@ module.exports = {
 
   getPersonalityTraits: function(assessmentId, callBack){
     this.get("/assessments/" + assessmentId + "/personality_traits", String(), callBack);
+  },
+
+  getCareerMatches: function(assessmentId, params, callBack){
+    var url = "/assessments/" + assessmentId + "/matches/careers?x=1"
+
+    url = this.appendParams(url, params);
+
+    this.get(url, String(), callBack);
+  },
+
+  getResults: function(assessmentId, data, params, callBack){
+    var url = "/assessments/" + assessmentId + "?x=1"
+
+    if(data != undefined){
+      url += "&data=" + data.join(",");
+    }
+
+    url = this.appendParams(url, params);
+
+    this.get(url, String(), callBack);
+  },
+
+  appendParams: function(url, params){
+    if(params["imagePack"] != undefined){
+      url += "&image_pack=" + params["imagePack"];
+    }
+    if(params["numberOfMatches"] != undefined){
+      url += "&number_of_matches=" + params["numberOfMatches"];
+    }
+    if(params["experienceLevels"] != undefined){
+      url += "&experience_levels=" + params["experienceLevels"];
+    }
+    return url;
   }
 };
 

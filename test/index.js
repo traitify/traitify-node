@@ -38,10 +38,10 @@ describe('#Traitify', function() {
 
     var responseData = {
       "personality_types":[
-        {"personality_type":{
-          "name":"Very Cool"
-        },
-        "score":100}
+      {"personality_type":{
+        "name":"Very Cool"
+      },
+      "score":100}
       ]
     };
 
@@ -57,10 +57,10 @@ describe('#Traitify', function() {
 
     var responseData = {
       "personality_traits":[
-        {"personality_trait":{
-          "name":"Cool Trait"
-        },
-        "score":100}
+      {"personality_trait":{
+        "name":"Cool Trait"
+      },
+      "score":100}
       ]
     };
 
@@ -75,7 +75,7 @@ describe('#Traitify', function() {
   it('Gets Assessment Slides', function(done) {
     var responseData = {
       "slides":[
-        {"caption":"Very Cool"}
+      {"caption":"Very Cool"}
       ]
     };
     nockApiHelper("get", "/assessments/fakeAssessmentId/slides", responseData, function(){
@@ -89,7 +89,7 @@ describe('#Traitify', function() {
   it("Sets Assessment's Slide", function(done) {
     var responseData = {
       "slides":[
-        {"caption":"Very Cool"}
+      {"caption":"Very Cool"}
       ]
     };
     nockApiHelper("put", "/assessments/fakeAssessmentId/slides/fakeSlideId", responseData, function(){
@@ -99,4 +99,57 @@ describe('#Traitify', function() {
       });
     });
   });
+
+  it('Gets Career Matches', function(done) {
+
+    var responseData = [
+    {
+      "career": {
+        "experience_level": {
+          "id": 3
+        }
+      },
+      "score": 79.5084891538157
+    }
+    ];
+
+    nockApiHelper("get", "/assessments/fakeAssessmentId/matches/careers?x=1", responseData, function(){
+      traitify.getCareerMatches("fakeAssessmentId", {}, function(data){
+        data[0].score.should.equal(79.5084891538157);
+        data[0].career.experience_level.id.should.equal(3);
+        done();
+      });
+    });
+  });
+
+it('Gets Assessment Results', function(done) {
+
+  var responseData = {
+    "id": "fakeAssessmentId",
+    "personality_types": [
+    {
+      "personality_type": {
+        "id": "55071620-bca6-4f15-b466-de8733a834a8"
+      },
+      "score": 61.49495
+    }
+    ],
+    "personality_traits": [
+    {
+      "personality_trait": {
+        "name": "Leader",
+      },
+      "score": 76.2712
+    }
+    ]
+  };
+
+  nockApiHelper("get", "/assessments/fakeAssessmentId?x=1&data=traits,types", responseData, function(){
+    traitify.getResults("fakeAssessmentId", ["traits","types"], {}, function(data){
+      data.personality_types[0].score.should.equal(61.49495);
+      done();
+    });
+  });
+});
+
 });
