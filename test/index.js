@@ -86,14 +86,29 @@ describe('#Traitify', function() {
     });
   });
 
-  it("Sets Assessment's Slide", function(done) {
+  it("Adds Assessment's Slide", function(done) {
     var responseData = {
-      "slides":[
-      {"caption":"Very Cool"}
+      slides:[
+        {"caption":"Very Cool"}
       ]
     };
     nockApiHelper("put", "/assessments/fakeAssessmentId/slides/fakeSlideId", responseData, function(){
-      traitify.setSlide("fakeAssessmentId", "fakeSlideId", {value: true, responseTime: 1000}, function(data){
+      traitify.addSlide("fakeAssessmentId", "fakeSlideId", {value: true, responseTime: 1000}, function(data){
+        data.slides[0].caption.should.equal("Very Cool");
+        done();
+      });
+    });
+  });
+
+  it("Adds Assessment's Slides", function(done) {
+    var responseData = {
+      "slides":[
+        {"caption":"Very Cool"}
+
+      ]
+    };
+    nockApiHelper("put", "/assessments/fakeAssessmentId/slides", responseData, function(){
+      traitify.addSlides("fakeAssessmentId", {value: true, responseTime: 1000}, function(data){
         data.slides[0].caption.should.equal("Very Cool");
         done();
       });

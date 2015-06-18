@@ -14,7 +14,7 @@ A small library providing access to traitify's api
 #### Config
 ```js
   var traitify = require('traitify');
-  
+
 	traitify.setHost("lvh.me");
 	traitify.setVersion("v1");
 	traitify.setSecretKey("fakeKey");
@@ -53,11 +53,22 @@ A small library providing access to traitify's api
 ```js
   var assessmentId = "Your Assessment Id";
 
-  traitify.setSlide(assessmentId, {"value":true, response_time: 1000}, function(assessment){
+  traitify.addSlide(assessmentId, {response: true, response_time: 1000}, function(assessment){
     // Use assessment here.
     console.log(assessment);
   });
 ```
+
+#### Bulk Set Assessment Slides
+```js
+  var assessmentId = "Your Assessment Id";
+
+  traitify.addSlides(assessmentId, [{id: "slide-uuid", "response":true, response_time: 1000}], function(assessment){
+    // Use assessment here.
+    console.log(assessment);
+  })
+```
+
 
 #### Get Assessment Personality Types
 ```js

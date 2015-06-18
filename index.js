@@ -61,6 +61,9 @@ module.exports = {
         callBack(JSON.parse(responseData));
       });
     });
+    if(params){
+      params = JSON.stringify(params)
+    }
 
     request.end(params);
   },
@@ -78,7 +81,7 @@ module.exports = {
   },
 
   createAssessment: function(deckId, callBack){
-    this.post("/assessments", '{"deck_id":"' + deckId + '"}', callBack);
+    this.post("/assessments", {deck_id: deckId }, callBack);
   },
 
   getAssessment: function(assessmentId, callBack){
@@ -88,11 +91,12 @@ module.exports = {
   getSlides: function(assessmentId, callBack){
     this.get("/assessments/" + assessmentId + "/slides", String(), callBack);
   },
-
-  setSlide: function(assessmentId, slideId, params, callBack){
+  addSlide: function(assessmentId, slideId, params, callBack){
     this.put("/assessments/" + assessmentId + "/slides/" + slideId, params, callBack);
   },
-
+  addSlides: function(assessmentId, params, callBack){
+    this.put("/assessments/" + assessmentId + "/slides", params, callBack);
+  },
   getPersonalityTypes: function(assessmentId, callBack){
     this.get("/assessments/" + assessmentId + "/personality_types", String(), callBack);
   },
@@ -134,5 +138,3 @@ module.exports = {
     return url;
   }
 };
-
-
