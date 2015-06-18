@@ -102,7 +102,7 @@ module.exports = {
   },
 
   getPersonalityTraits: function(assessmentId, callBack){
-    this.get("/assessments/" + assessmentId + "/personality_traits", String(), callBack);
+    this.get("/assessments/" + assessmentId + "/personality_traits/raw", String(), callBack);
   },
 
   getCareerMatches: function(assessmentId, params, callBack){
