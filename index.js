@@ -107,10 +107,7 @@ module.exports = {
 
   getCareerMatches: function(assessmentId, params, callBack){
     var url = "/assessments/" + assessmentId + "/matches/careers?x=1"
-
-    url = this.appendParams(url, params);
-
-    this.get(url, String(), callBack);
+    this.post(url, params, callBack);
   },
 
   getResults: function(assessmentId, data, params, callBack){
